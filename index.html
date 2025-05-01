@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wolfgang's Portfolio</title>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Helvetica:400,700" rel="stylesheet" />
+    <!-- CSS Styles -->
+    <style>
+      /* [All your CSS styles remain exactly the same] */
+      /* ... (include all your CSS from earlier) ... */
+      :root {
+        --navbar-bg: #003366;
+        --navbar-text: #ffffff;
+        --container-bg: #ffffff;
+        --container-shadow: rgba(0, 0, 0, 0.1);
+        --button-primary: #003366;
+        --button-hover: #0055aa;
+        --text-color: #333333;
+        --body-bg: #f2f4f7;
+        --ticker-bg: linear-gradient(90deg, #a1c4fd, #c2e9fb);
+        --ticker-text: #003366;
+      }
+      /* --- Blue (default) --- */
+      body.blue { }
+      /* --- Dark Mode --- */
+      body.dark {
+        --navbar-bg: #121212;
+        --navbar-text: #ffffff;
+        --container-bg: #1e1e1e;
+        --container-shadow: rgba(0, 0, 0, 0.7);
+        --button-primary: #bb86fc;
+        --button-hover: #a370d6;
+        --text-color: #ffffff;
+        --body-bg: #121212;
+        --ticker-bg: linear-gradient(90deg, #333333, #555555);
+        --ticker-text: #ffffff;
+      }
+      /* --- Modern --- */
+      body.modern {
+        --navbar-bg: #222222;
+        --navbar-text: #f7f7f7;
+        --container-bg: #f0f0f0;
+        --container-shadow: rgba(0, 0, 0, 0.2);
+        --button-primary: #007acc;
+        --button-hover: #005a99;
+        --text-color: #333333;
+        --body-bg: #e0e0e0;
+        --ticker-bg: linear-gradient(90deg, #8ec5fc, #e0c3fc);
+        --ticker-text: #222222;
+      }
+      /* --- Classic --- */
+      body.classic {
+        --navbar-bg: #001f3f;
+        --navbar-text: #ffffff;
+        --container-bg: #ffffff;
+        --container-shadow: rgba(0, 0, 0, 0.2);
+        --button-primary: #001f3f;
+        --button-hover: #003366;
+        --text-color: #333333;
+        --body-bg: #fffaf0;
+        --ticker-bg: linear-gradient(90deg, #e6d5b8, #fdfcfb);
+        --ticker-text: #001f3f;
+      }
+      /* --- Global Styles --- */
+      body {
+        margin: 0;
+        font-family: Helvetica, Arial, sans-serif;
+        background-color: var(--body-bg);
+        color: var(--text-color);
+        transition: background-color 0.3s, color 0.3s;
+      }
+      .navbar {
+        background-color: var(--navbar-bg);
+        color: var(--navbar-text);
+        padding: 15px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .navbar .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+      .navbar .nav-links button {
+        background: none;
+        border: none;
+        color: var(--navbar-text);
+        font-size: 1rem;
+        margin-right: 10px;
+        cursor: pointer;
+      }
+      .navbar .nav-links button:hover {
+        text-decoration: underline;
+      }
+      .ticker-banner {
+        background: var(--ticker-bg);
+        color: var(--ticker-text);
+        padding: 5px 0;
+        text-align: center;
+        overflow: hidden;
+        line-height: 1.5;
+      }
+      .ticker-content {
+        display: inline-block;
+        padding-left: 100%;
+        animation: ticker 20s linear infinite;
+        white-space: nowrap;
+      }
+      @keyframes ticker {
+        from { transform: translateX(0); }
+        to { transform: translateX(-100%); }
+      }
+      .container {
+        max-width: 900px;
+        margin: 20px auto;
+        padding: 20px;
+        background: var(--container-bg);
+        box-shadow: 0 4px 8px var(--container-shadow);
+        border-radius: 5px;
+      }
+      .container h2 {
+        margin-bottom: 20px;
+      }
+      /* --- Home Page Layout --- */
+      .home-layout {
+        display: flex;
+        gap: 20px;
+      }
+      .home-left {
+        flex: 2;
+      }
+      .home-right {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      .timeframe-buttons button {
+        margin-right: 10px;
+        margin-bottom: 10px;
+        padding: 8px 14px;
+        border: 1px solid var(--button-primary);
+        background: var(--container-bg);
+        color: var(--button-primary);
+        cursor: pointer;
+        border-radius: 4px;
+        font-size: 0.9rem;
+      }
+      .timeframe-buttons button.active,
+      .timeframe-buttons button:hover {
+        background: var(--button-primary);
+        color: white;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      table thead {
+        background: var(--button-primary);
+        color: var(--navbar-text);
+      }
+      table th,
+      table td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+      table tbody tr:hover {
+        background-color: #f1f1f1;
+      }
+      .spinner {
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid var(--button-primary);
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        animation: spin 0.8s linear infinite;
+        display: inline-block;
+      }
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      .news-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+      .news-card {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden;
+        background: var(--container-bg);
+        width: 100%;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        transition: transform 0.2s;
+      }
+      .news-card:hover {
+        transform: translateY(-5px);
+      }
+      .news-card img {
+        width: 100%;
+        height: 160px;
+        object-fit: cover;
+      }
+      .news-card .news-content {
+        padding: 15px;
+      }
+      .news-card h3 {
+        font-size: 1.1rem;
+        margin: 0 0 10px 0;
+      }
+      .news-card p {
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+      }
+      .news-card a {
+        text-decoration: none;
+        color: var(--button-primary);
+        font-weight: bold;
+      }
+      .footer {
+        text-align: center;
+        margin-top: 20px;
+        padding: 10px;
+        font-size: 0.8rem;
+      }
+      .settings-container {
+        max-width: 500px;
+        margin: 20px auto;
+        padding: 20px;
+        background: var(--container-bg);
+        box-shadow: 0 4px 8px var(--container-shadow);
+        border-radius: 5px;
+      }
+      .settings-container h2 {
+        margin-bottom: 20px;
+      }
+      .settings-container label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+      .settings-container select,
+      .settings-container input {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 20px;
+      }
+      .settings-container button {
+        padding: 8px 16px;
+        background: var(--button-primary);
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      /* --- Tooltip Styles --- */
+      .tooltip {
+        position: absolute;
+        min-width: 180px;
+        background: var(--container-bg);
+        color: var(--text-color);
+        border: 1px solid var(--button-primary);
+        border-radius: 4px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        pointer-events: auto;
+        display: block;
+        z-index: 1000;
+      }
+      .tooltip-header {
+        background: var(--button-primary);
+        color: var(--navbar-text);
+        padding: 4px 8px;
+        cursor: move;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.9rem;
+        border-radius: 4px 4px 0 0;
+      }
+      .tooltip-header button {
+        background: none;
+        border: none;
+        color: var(--navbar-text);
+        cursor: pointer;
+        font-size: 1rem;
+        margin-left: 5px;
+      }
+      .tooltip-body {
+        padding: 8px;
+        font-size: 0.9rem;
+      }
+      /* --- Portfolio Summary --- */
+      .portfolio-summary {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .portfolio-card {
+        padding: 10px;
+        background: var(--container-bg);
+        border: 1px solid var(--button-primary);
+        border-radius: 6px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      .portfolio-card h4 {
+        margin: 0 0 5px 0;
+      }
+      .portfolio-card p {
+        margin: 0;
+        font-size: 0.9rem;
+      }
+      /* Market status and price change styles */
+      .market-status {
+        font-size: 0.8rem;
+        margin-left: 8px;
+        padding: 2px 6px;
+        border-radius: 4px;
+      }
+      .market-status.open {
+        background-color: #4CAF50;
+        color: white;
+      }
+      .market-status.closed {
+        background-color: #f44336;
+        color: white;
+      }
+      .market-status.unknown {
+        background-color: #ff9800;
+        color: white;
+      }
+      .positive {
+        color: #4CAF50;
+      }
+      .negative {
+        color: #f44336;
+      }
+      .no-change {
+        color: #9E9E9E;
+      }
+      .chart-container {
+        height: 300px;
+        position: relative;
+      }
+    </style>
+    <!-- Papa Parse -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+  </head>
+  <body class="blue">
+    <div id="root"></div>
+    <!-- Load React, ReactDOM, Babel -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- Chart.js & Financial Plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-financial"></script>
+    <script type="text/babel">
+      // Destructure hooks from React
+      const { useState, useEffect, useRef } = React;
+      
+      const allowedStocks = ["NFLX", "GOOG", "APH", "COST"];
+
+      // Helper to check if market is open (Eastern Time)
+      function checkMarketOpen() {
+        const now = new Date();
+        const utcHours = now.getUTCHours();
+        const day = now.getUTCDay();
+        const estHours = utcHours - 4; // Convert UTC to EST (consider DST)
+        
+        // Weekend check
+        if (day === 0 || day === 6) return "closed";
+        
+        // Market hours: 9:30 AM to 4:00 PM ET
+        const isMarketHours = (
+          (estHours > 9 || (estHours === 9 && now.getUTCMinutes() >= 30)) && 
+          (estHours < 16)
+        );
+        
+        return isMarketHours ? "open" : "closed";
+      }
+
+      // Helper to format dates without timezone issues
+      function formatDateSafe(dateStr) {
+        if (!dateStr) return "N/A";
+        const date = new Date(dateStr);
+        // Handle timezone offset to get correct date
+        const offset = date.getTimezoneOffset() * 60000;
+        const localDate = new Date(date.getTime() - offset);
+        return localDate.toISOString().split('T')[0];
+      }
+
+      // NavBar Component
+      function NavBar({ setPage }) {
+        return (
+          <div className="navbar">
+            <div className="logo">Wolfgang's Portfolio</div>
+            <div className="nav-links">
+              <button onClick={() => setPage("home")}>Home</button>
+              <button onClick={() => setPage("news")}>News</button>
+              <button onClick={() => setPage("stocks")}>Stocks</button>
+              <button onClick={() => setPage("settings")}>Settings</button>
+            </div>
+          </div>
+        );
+      }
+
+      // TickerBanner Component
+      function TickerBanner() {
+        const [tickerData, setTickerData] = useState([]);
+        useEffect(() => {
+          function fetchTicker() {
+            const fallback = allowedStocks.map(sym => ({
+              symbol: sym,
+              price: (Math.random() * 1000 + 100).toFixed(2)
+            }));
+            setTickerData(fallback);
+          }
+          fetchTicker();
+          const interval = setInterval(fetchTicker, 10000);
+          return () => clearInterval(interval);
+        }, []);
+        const tickerText = tickerData.map(d => `${d.symbol}: $${d.price}`).join("   •••   ");
+        return (
+          <div className="ticker-banner">
+            <div className="ticker-content">{tickerText || "Loading ticker..."}</div>
+          </div>
+        );
+      }
+
+      // PortfolioSummary Component
+      function PortfolioSummary() {
+        const [portfolio, setPortfolio] = useState([]);
+        const [loading, setLoading] = useState(true);
+        const [marketStatus, setMarketStatus] = useState("unknown");
+        const [asOfDate, setAsOfDate] = useState(null);
+        
+        useEffect(() => {
+        fetch(`http://localhost:5050/api/quote/APH`, { cache: 'no-store' }) // Fetch data with cache-busting
+            .then(res => res.json()) // Parse JSON response
+            .then(data => {
+                console.log('Fetched Data:', data); // Log the full response for debugging
+                setPortfolio(data.history || []); // Ensure the portfolio state is updated
+            })
+            .catch(error => console.error('Fetch error:', error)); // Log any fetch errors
+    }, []);
+
+        useEffect(() => {
+          async function fetchPortfolio() {
+            setLoading(true);
+            const currentMarketStatus = checkMarketOpen();
+            setMarketStatus(currentMarketStatus);
+            
+            const results = [];
+            let latestPortfolioDate = null;
+            
+            for (const symbol of allowedStocks) {
+              try {
+                const response = await fetch(`http://localhost:5050/api/quote/${symbol}`);
+                if (!response.ok) throw new Error('Network error');
+                const data = await response.json();
+                const history = data.history || [];
+                
+                // Find the most recent trading day
+                let latestData = history[history.length - 1];
+                let previousData = history.length >= 2 ? history[history.length - 2] : null;
+                
+                if (latestData && latestData.date) {
+                  const stockDate = new Date(latestData.date);
+                  if (!latestPortfolioDate || stockDate > latestPortfolioDate) {
+                    latestPortfolioDate = stockDate;
+                  }
+                }
+
+                // Determine what to display
+                let displayPrice, displayDate, changeDisplay, isPositive;
+                
+                if (currentMarketStatus === "open" && data.currentPrice) {
+                  displayPrice = data.currentPrice;
+                  displayDate = formatDateSafe(new Date());
+                  
+                  if (latestData) {
+                    const change = displayPrice - latestData.price;
+                    const changePercent = (change / latestData.price * 100).toFixed(2);
+                    changeDisplay = `${changePercent}%`;
+                    isPositive = change >= 0;
+                  }
+                } else {
+                  if (latestData) {
+                    displayPrice = latestData.price;
+                    displayDate = formatDateSafe(latestData.date);
+                    
+                    if (previousData) {
+                      const change = displayPrice - previousData.price;
+                      const changePercent = (change / previousData.price * 100).toFixed(2);
+                      changeDisplay = `${changePercent}%`;
+                      isPositive = change >= 0;
+                    }
+                  }
+                }
+                
+                results.push({
+                  symbol,
+                  price: displayPrice ? displayPrice.toFixed(2) : "N/A",
+                  change: changeDisplay || "N/A",
+                  isPositive,
+                  date: displayDate || "N/A"
+                });
+              } catch (err) {
+                console.error(`Error fetching ${symbol}:`, err);
+                results.push({
+                  symbol,
+                  price: "N/A",
+                  change: "Error",
+                  isPositive: false,
+                  date: "N/A"
+                });
+              }
+            }
+            
+            setPortfolio(results);
+            setAsOfDate(latestPortfolioDate ? formatDateSafe(latestPortfolioDate) : null);
+            setLoading(false);
+          }
+
+          fetchPortfolio();
+          const interval = setInterval(fetchPortfolio, 30000);
+          return () => clearInterval(interval);
+        }, []);
+
+        return (
+          <div className="portfolio-summary">
+            <h3>Portfolio Summary</h3>
+            {loading ? (
+              <div className="spinner"></div>
+            ) : (
+              <>
+                <div style={{ marginBottom: '10px', fontSize: '0.9rem' }}>
+                  Market: <span className={`market-status ${marketStatus}`}>
+                    {marketStatus === 'open' ? 'Open' : 'Closed'}
+                  </span>
+                  {asOfDate && marketStatus === 'closed' && 
+                    <span style={{ marginLeft: '10px' }}>
+                      (Data as of {new Date(asOfDate).toLocaleDateString('en-US', { 
+                        weekday: 'short', 
+                        month: 'short', 
+                        day: 'numeric' 
+                      })})
+                    </span>
+                  }
+                </div>
+                
+                {portfolio.map((item, idx) => (
+                  <div key={idx} className="portfolio-card">
+                    <h4>{item.symbol}</h4>
+                    <p>Price: ${item.price}</p>
+                    <p className={
+                      item.change === "N/A" || item.change === "Error" ? 
+                        'no-change' : 
+                        item.isPositive ? 'positive' : 'negative'
+                    }>
+                      Daily Change: {item.change}
+                    </p>
+                    <p style={{ fontSize: '0.8rem', color: '#666' }}>
+                      {item.date && item.date !== 'N/A' ? 
+                        `Date: ${new Date(item.date).toLocaleDateString()}` : 
+                        'Date not available'}
+                    </p>
+                  </div>
+                ))}
+              </>
+            )}
+          </div>
+        );
+      }
+
+      // StockChart Component
+      function StockChart({ symbol, timeframe }) {
+        const canvasRef = useRef(null);
+        const [chartData, setChartData] = useState(null);
+        const [loading, setLoading] = useState(true);
+        const chartRef = useRef(null);
+        
+        useEffect(() => {
+          async function fetchChartData() {
+            setLoading(true);
+            try {
+              const response = await fetch(`http://localhost:5050/api/quote/${symbol}`);
+              if (!response.ok) throw new Error("Network error");
+              const data = await response.json();
+              
+              if (!data.history || data.history.length === 0) {
+                throw new Error("No history data");
+              }
+
+              let allData = data.history.map(item => ({
+                date: new Date(item.date),
+                price: item.price
+              })).sort((a, b) => a.date - b.date);
+
+              let filteredData = [...allData];
+              if (timeframe !== "ALL") {
+                const latestDate = allData[allData.length - 1].date;
+                let cutoffDate = new Date(latestDate);
+                
+                switch(timeframe) {
+                  case "5D":
+                    let tradingDays = 0;
+                    let daysBack = 0;
+                    while (tradingDays < 5 && daysBack < 14) {
+                      daysBack++;
+                      const date = new Date(latestDate);
+                      date.setDate(date.getDate() - daysBack);
+                      if (date.getDay() !== 0 && date.getDay() !== 6) {
+                        tradingDays++;
+                      }
+                    }
+                    cutoffDate = new Date(latestDate);
+                    cutoffDate.setDate(cutoffDate.getDate() - daysBack);
+                    break;
+                  case "1M":
+                    cutoffDate.setMonth(cutoffDate.getMonth() - 1);
+                    break;
+                  case "3M":
+                    cutoffDate.setMonth(cutoffDate.getMonth() - 3);
+                    break;
+                  case "6M":
+                    cutoffDate.setMonth(cutoffDate.getMonth() - 6);
+                    break;
+                  case "YTD":
+                    cutoffDate = new Date(latestDate.getFullYear(), 0, 1);
+                    break;
+                  default:
+                    cutoffDate = new Date(0);
+                }
+                
+                filteredData = allData.filter(item => item.date >= cutoffDate);
+              }
+
+              const marketOpen = checkMarketOpen();
+              if (marketOpen === "open" && data.currentPrice) {
+                const todayStr = formatDateSafe(new Date());
+                if (!filteredData.some(item => formatDateSafe(item.date) === todayStr)) {
+                  filteredData.push({
+                    date: new Date(),
+                    price: data.currentPrice
+                  });
+                }
+              }
+
+              filteredData.sort((a, b) => a.date - b.date);
+              
+              const labels = filteredData.map(item => {
+                const date = new Date(item.date);
+                if (timeframe === "ALL") {
+                  return date.toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'short', 
+                    day: 'numeric' 
+                  });
+                } else if (timeframe === "YTD" || timeframe === "6M" || timeframe === "3M") {
+                  return date.toLocaleDateString('en-US', { 
+                    month: 'short', 
+                    day: 'numeric' 
+                  });
+                } else {
+                  return date.toLocaleDateString('en-US', { 
+                    weekday: 'short', 
+                    month: 'short', 
+                    day: 'numeric' 
+                  });
+                }
+              });
+              
+              const prices = filteredData.map(item => item.price);
+
+              setChartData({ labels, prices, allData: filteredData });
+              setLoading(false);
+            } catch (err) {
+              console.error(err);
+              setLoading(false);
+            }
+          }
+
+          fetchChartData();
+        }, [symbol, timeframe]);
+
+        useEffect(() => {
+          if (!chartData || loading) return;
+          
+          const ctx = canvasRef.current.getContext("2d");
+          if (chartRef.current) {
+            chartRef.current.destroy();
+          }
+          
+          const config = {
+            type: "line",
+            data: {
+              labels: chartData.labels,
+              datasets: [{
+                label: `${symbol} Price`,
+                data: chartData.prices,
+                borderColor: getComputedStyle(document.documentElement)
+                  .getPropertyValue("--button-primary")
+                  .trim(),
+                backgroundColor: "rgba(0,51,102,0.1)",
+                fill: true,
+                tension: 0.1,
+                pointRadius: timeframe === "ALL" ? 0 : 2,
+                pointHoverRadius: 5,
+                pointHitRadius: 10
+              }]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                legend: {
+                  display: false
+                },
+                tooltip: {
+                  enabled: true,
+                  callbacks: {
+                    title: function(context) {
+                      const date = new Date(chartData.allData[context[0].dataIndex].date);
+                      return date.toLocaleDateString('en-US', { 
+                        weekday: 'long', 
+                        year: 'numeric', 
+                        month: 'long', 
+                        day: 'numeric' 
+                      });
+                    },
+                    label: function(context) {
+                      return `${symbol}: $${context.parsed.y.toFixed(2)}`;
+                    }
+                  }
+                }
+              },
+              scales: {
+                x: {
+                  grid: {
+                    display: false
+                  },
+                  ticks: {
+                    maxRotation: timeframe === "ALL" ? 45 : 0,
+                    autoSkip: true,
+                    maxTicksLimit: timeframe === "ALL" ? 12 : 8
+                  }
+                },
+                y: {
+                  grid: {
+                    color: "rgba(0,0,0,0.1)"
+                  }
+                }
+              }
+            }
+          };
+          
+          chartRef.current = new Chart(ctx, config);
+          
+          return () => {
+            if (chartRef.current) {
+              chartRef.current.destroy();
+            }
+          };
+        }, [chartData, loading, symbol, timeframe]);
+
+        return (
+          <div className="chart-container">
+            {loading ? (
+              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+                <div className="spinner"></div>
+              </div>
+            ) : (
+              <canvas ref={canvasRef} />
+            )}
+          </div>
+        );
+      }
+
+      // --- after your NewsMini & before Home ---
+function AverageGrowthTable() {
+  const [averages, setAverages] = React.useState({});
+  const timeframes = ["5D","1M","3M","6M","YTD","1Y","ALL"];
+
+  React.useEffect(() => {
+    async function computeAverages() {
+      // 1) fetch history for every stock
+      const allHistories = await Promise.all(
+        allowedStocks.map(sym =>
+          fetch(`http://localhost:5050/api/quote/${sym}`)
+            .then(r => r.json())
+            .then(d => (d.history||[])
+              .map(i => ({ date: new Date(i.date), price: i.price }))
+              .sort((a,b)=>a.date-b.date)
+            )
+            .catch(() => [])
+        )
+      );
+
+      const now = new Date();
+      const results = {};
+
+      timeframes.forEach(tf => {
+        // figure the cutoff date for this timeframe
+        let cutoff = new Date(allHistories[0].slice(-1)[0]?.date || now);
+        switch(tf) {
+          case "5D": {
+            let days = 0, back = 0;
+            while(days < 5 && back < 14) {
+              back++;
+              const d = new Date(cutoff);
+              d.setDate(d.getDate() - back);
+              if(d.getDay()!==0 && d.getDay()!==6) days++;
+            }
+            cutoff.setDate(cutoff.getDate() - back);
+            break;
+          }
+          case "1M":
+            cutoff.setMonth(cutoff.getMonth() - 1); break;
+          case "3M":
+            cutoff.setMonth(cutoff.getMonth() - 3); break;
+          case "6M":
+            cutoff.setMonth(cutoff.getMonth() - 6); break;
+          case "YTD":
+            cutoff = new Date(cutoff.getFullYear(), 0, 1); break;
+          case "1Y":
+            cutoff.setFullYear(cutoff.getFullYear() - 1); break;
+          case "ALL":
+            cutoff = new Date(0); break;
+        }
+
+        // compute each stock's growth over [cutoff → latest]
+        const growths = allHistories
+          .map(hist => {
+            const slice = hist.filter(pt => pt.date >= cutoff);
+            if(slice.length < 2) return null;
+            const start = slice[0].price;
+            const end   = slice[slice.length - 1].price;
+            return (end - start) / start * 100;
+          })
+          .filter(v => v !== null);
+
+        // average & round
+        const avg = growths.length
+          ? (growths.reduce((sum,v)=>sum+v,0)/growths.length).toFixed(2)
+          : "N/A";
+
+        results[tf] = avg;
+      });
+
+      setAverages(results);
+    }
+
+    computeAverages();
+  }, []);
+
+  return (
+    <div style={{ marginTop: 20 }}>
+      <h3>Average Growth Across All Stocks</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Timeframe</th>
+            <th>Avg Growth %</th>
+          </tr>
+        </thead>
+        <tbody>
+          {timeframes.map(tf => (
+            <tr key={tf}>
+              <td>{tf}</td>
+              <td>
+                {averages[tf] != null ? averages[tf] + "%" : "…"}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+      // Home Component
+      function Home() {
+        const [selectedSymbol, setSelectedSymbol] = useState("NFLX");
+        const [timeframe, setTimeframe] = useState("5D");
+        
+        return (
+          <div className="container">
+            <h2>Dashboard Overview</h2>
+            <div className="home-layout">
+              <div className="home-left">
+                <div style={{ marginBottom: "20px" }}>
+                  <label>
+                    Select Stock:
+                    <select 
+                      value={selectedSymbol} 
+                      onChange={e => setSelectedSymbol(e.target.value)}
+                      style={{ marginLeft: "10px", padding: "5px" }}
+                    >
+                      {allowedStocks.map(sym => (
+                        <option key={sym} value={sym}>{sym}</option>
+                      ))}
+                    </select>
+                  </label>
+                </div>
+                <div>
+                  <label>Timeframe:</label>
+                  <div className="timeframe-buttons" style={{ marginTop: "5px" }}>
+                    {["5D", "1M", "3M", "6M", "YTD", "ALL"].map(tf => (
+                      <button 
+                        key={tf} 
+                        className={timeframe === tf ? "active" : ""} 
+                        onClick={() => setTimeframe(tf)}
+                      >
+                        {tf}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                <div style={{ marginTop: "20px" }}>
+  <StockChart symbol={selectedSymbol} timeframe={timeframe} />
+  <AverageGrowthTable />
+</div>
+
+              </div>
+              
+              <div className="home-right">
+                <PortfolioSummary />
+                <div>
+                  <h3>Latest News</h3>
+                  <NewsMini />
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      // NewsMini Component
+      function NewsMini() {
+        const [articles, setArticles] = useState([]);
+        useEffect(() => {
+          fetch("https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=5a730024f5034c9bac673d53d03656d9")
+            .then(res => {
+              if (!res.ok) throw new Error("Network error");
+              return res.json();
+            })
+            .then(data => {
+              if (data.articles) setArticles(data.articles.slice(0, 3));
+            })
+            .catch(err => {
+              setArticles([
+                { title: "Market Update: Stocks Rally on Positive Earnings", description: "Major indices rose as several companies reported better-than-expected earnings." },
+                { title: "Tech Sector Leads Gains", description: "Technology stocks outperformed as investors remain optimistic about growth prospects." }
+              ]);
+              console.error(err);
+            });
+        }, []);
+        return (
+          <div>
+            {articles.length > 0 ? (
+              articles.map((article, index) => (
+                <div key={index} style={{ marginBottom: "15px" }}>
+                  <strong>{article.title}</strong>
+                  <p style={{ fontSize: "0.85rem" }}>{article.description || "No description available."}</p>
+                </div>
+              ))
+            ) : (
+              <p>Loading mini news...</p>
+            )}
+          </div>
+        );
+      }
+
+      // News Component
+      function News() {
+        const [articles, setArticles] = useState([]);
+        useEffect(() => {
+          fetch("https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=5a730024f5034c9bac673d53d03656d9")
+            .then(res => {
+              if (!res.ok) throw new Error("Network error");
+              return res.json();
+            })
+            .then(data => {
+              if (data.articles) setArticles(data.articles);
+            })
+            .catch(err => {
+              setArticles([
+                {
+                  title: "Market Update: Stocks Rally on Positive Earnings",
+                  description: "Major indices rose as several companies reported better-than-expected earnings.",
+                  url: "https://example.com",
+                  urlToImage: "https://via.placeholder.com/300x160"
+                },
+                {
+                  title: "Tech Sector Leads Gains",
+                  description: "Technology stocks outperformed as investors remain optimistic about growth prospects.",
+                  url: "https://example.com",
+                  urlToImage: "https://via.placeholder.com/300x160"
+                }
+              ]);
+              console.error(err);
+            });
+        }, []);
+        return (
+          <div className="container">
+            <h2>Latest Business News</h2>
+            <div className="news-container">
+              {articles.length > 0 ? (
+                articles.map((article, index) => (
+                  <div className="news-card" key={index}>
+                    {article.urlToImage && <img src={article.urlToImage} alt="news" />}
+                    <div className="news-content">
+                      <h3>{article.title}</h3>
+                      <p>{article.description || "No description available."}</p>
+                      <a href={article.url} target="_blank" rel="noopener noreferrer">Read More</a>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <p>Loading news articles...</p>
+              )}
+            </div>
+          </div>
+        );
+      }
+
+      // Stocks Component
+      function Stocks() {
+        const [stocks, setStocks] = useState([]);
+        const [loading, setLoading] = useState(true);
+        
+        useEffect(() => {
+          async function fetchStocks() {
+            setLoading(true);
+            try {
+              const results = await Promise.all(
+                allowedStocks.map(async sym => {
+                  try {
+                    const res = await fetch(`http://localhost:5050/api/quote/${sym}`);
+                    if (!res.ok) throw new Error("Network error");
+                    const data = await res.json();
+                    return {
+                      symbol: sym,
+                      price: data.currentPrice?.toFixed(2) || "N/A",
+                      change: data.changePercent !== "N/A" ? `${data.changePercent}%` : "N/A",
+                      isPositive: data.changePercent !== "N/A" ? parseFloat(data.changePercent) > 0 : false
+                    };
+                  } catch (err) {
+                    console.error(`Error fetching ${sym}:`, err);
+                    return {
+                      symbol: sym,
+                      price: "N/A",
+                      change: "Error",
+                      isPositive: false
+                    };
+                  }
+                })
+              );
+              setStocks(results);
+            } catch (err) {
+              console.error("Error fetching stocks:", err);
+            } finally {
+              setLoading(false);
+            }
+          }
+          
+          fetchStocks();
+          const interval = setInterval(fetchStocks, 30000);
+          return () => clearInterval(interval);
+        }, []);
+        
+        return (
+          <div className="container">
+            <h2>Stock Details</h2>
+            {loading ? (
+              <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <div className="spinner"></div>
+              </div>
+            ) : (
+              <table>
+                <thead>
+                  <tr>
+                    <th>Symbol</th>
+                    <th>Price</th>
+                    <th>Change</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {stocks.map((s, index) => (
+                    <tr key={index}>
+                      <td>{s.symbol}</td>
+                      <td>${s.price}</td>
+                      <td className={s.change.includes("Error") || s.change.includes("N/A") ? 
+                          'no-change' : 
+                          s.isPositive ? 'positive' : 'negative'}>
+                        {s.change}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </div>
+        );
+      }
+
+      // Settings Component
+      function Settings({ themeName, setThemeName, setPage }) {
+        const [localTheme, setLocalTheme] = useState(themeName);
+        const handleChange = (e) => {
+          const newTheme = e.target.value;
+          setLocalTheme(newTheme);
+          localStorage.setItem("themeName", newTheme);
+          document.body.className = newTheme;
+          setThemeName(newTheme);
+        };
+        return (
+          <div className="settings-container">
+            <h2>Settings</h2>
+            <label>Color Preset:</label>
+            <select value={localTheme} onChange={handleChange}>
+              <option value="blue">Blue (Fidelity-like)</option>
+              <option value="dark">Dark</option>
+              <option value="modern">Modern</option>
+              <option value="classic">Classic</option>
+            </select>
+            <button onClick={() => setPage("home")}>Back to Home</button>
+          </div>
+        );
+      }
+
+      // Footer Component
+      function Footer() {
+        return (
+          <div className="footer">
+            &copy; {new Date().getFullYear()} Wolfgang's Portfolio. All rights reserved.
+          </div>
+        );
+      }
+
+      // App Component
+      function App() {
+        const [page, setPage] = useState("home");
+        const [themeName, setThemeName] = useState(localStorage.getItem("themeName") || "blue");
+      
+        useEffect(() => {
+          document.body.className = themeName;
+        }, [themeName]);
+      
+        return (
+          <div>
+            <NavBar setPage={setPage} />
+            <TickerBanner />
+            {page === "home" && <Home />}
+            {page === "news" && <News />}
+            {page === "stocks" && <Stocks />}
+            {page === "settings" && <Settings themeName={themeName} setThemeName={setThemeName} setPage={setPage} />}
+            <Footer />
+          </div>
+        );
+      }
+      
+      // Render the app with error handling
+      try {
+        ReactDOM.render(<App />, document.getElementById("root"));
+      } catch (error) {
+        document.getElementById('root').innerHTML = `
+          <div style="padding: 20px; color: red; font-family: sans-serif;">
+            <h2>Application Error</h2>
+            <p>${error.message}</p>
+            <p>Please check the console for details</p>
+          </div>
+        `;
+        console.error('Render error:', error);
+      }
+    </script>
+  </body>
+</html>
